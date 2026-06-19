@@ -181,6 +181,6 @@ public final class TextUtils {
             escaped = prefix + " ... [+" + omitted + " chars]";
         }
 
-        return escaped;
+        return StringUtils.abbreviate(escaped, safeMax);
     }
 }

@@ -9,5 +9,4 @@ class SchedulerApplicationTests {
     @Test
     void contextLoads() {
     }
-
 }
