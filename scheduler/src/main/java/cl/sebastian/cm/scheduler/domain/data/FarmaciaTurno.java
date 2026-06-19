@@ -32,7 +32,7 @@ public class FarmaciaTurno extends Seba {
 
     @Schema(description = "Identificador único del local de farmacia", example = "12345")
     @JsonProperty("local_id")
-    private Long storeId;
+    private Integer storeId;
 
     @Schema(description = "Clave foránea de la región (según codificación externa)", example = "8")
     @JsonProperty("fk_region")
@@ -110,7 +110,7 @@ public class FarmaciaTurno extends Seba {
      *
      * @return ID de la farmacia
      */
-    public Long getStoreId() {
+    public Integer getStoreId() {
         return storeId;
     }
 
@@ -119,7 +119,7 @@ public class FarmaciaTurno extends Seba {
      *
      * @param storeId ID de la farmacia
      */
-    public void setStoreId(Long storeId) {
+    public void setStoreId(Integer storeId) {
         this.storeId = storeId;
     }
 

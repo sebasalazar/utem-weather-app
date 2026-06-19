@@ -25,7 +25,7 @@ DROP TABLE IF EXISTS pharmacies_on_duty CASCADE;
 CREATE TABLE pharmacies_on_duty (
     pk          bigint           GENERATED ALWAYS AS IDENTITY,  -- Clave primaria interna
     pharmacy_fk bigint           NOT NULL,
-    duty_date   timestamp        NOT NULL,
+    duty_date   date             NOT NULL,
     created     timestamptz      NOT NULL DEFAULT NOW(),        -- Fecha de creación
     updated     timestamptz      NOT NULL DEFAULT NOW(),        -- Fecha de última modificación
     PRIMARY KEY (pk)
