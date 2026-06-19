@@ -25,19 +25,20 @@ import org.springframework.stereotype.Component;
  * procesamiento del resto.
  * </p>
  *
- * @author Sebastián Salazar
- * @version 1.0
+ * @author Sebastián Salazar Molina
+ * @since 0.9.9
+ * @version 0.9.9
  * @see PharmaManager
  * @see MinsalService
  * @see Scheduled
  */
 @Component
-public class RefreshTask {
+public class MinsalTask {
 
     /**
      * Logger de la clase para registrar eventos, advertencias y errores.
      */
-    private static final Logger LOGGER = LoggerFactory.getLogger(RefreshTask.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MinsalTask.class);
 
     /**
      * Gestor de farmacias encargado de la lógica de persistencia.
@@ -56,7 +57,7 @@ public class RefreshTask {
      * @param minsalService servicio de consulta de turnos.
      */
     @Autowired
-    public RefreshTask(final PharmaManager pharmaManager,
+    public MinsalTask(final PharmaManager pharmaManager,
             final MinsalService minsalService) {
         this.pharmaManager = pharmaManager;
         this.minsalService = minsalService;
@@ -108,7 +109,7 @@ public class RefreshTask {
      * detiene el procesamiento de las demás.
      * </p>
      */
-    @Scheduled(fixedDelayString = "${scheduler.hour.task}")
+    @Scheduled(fixedDelayString = "${scheduler.minsal.task}")
     public void schedulerRun() {
         List<FarmaciaTurno> farmacias = minsalService.obtenerFarmaciasTurno();
         if (CollectionUtils.isEmpty(farmacias)) {

@@ -3,6 +3,10 @@ package cl.sebastian.cm.scheduler.domain.enums;
 /**
  * Enumeración que representa las farmacias disponibles. Cada constante tiene un
  * {@code label} legible asignado en el constructor.
+ *
+ * @author Sebastián Salazar Molina
+ * @since 0.9.9
+ * @version 0.9.9
  */
 public enum Commerce {
 

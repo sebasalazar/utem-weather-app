@@ -3,7 +3,6 @@ package cl.sebastian.cm.scheduler.domain.repository;
 import cl.sebastian.cm.scheduler.domain.model.Pharmacy;
 import cl.sebastian.cm.scheduler.domain.model.PharmacyOnDuty;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -19,8 +18,9 @@ import org.springframework.stereotype.Repository;
  * para buscar un turno específico por farmacia y fecha (ignorando la hora).
  * </p>
  *
- * @author Sebastián SalazarRecu
- * @version 1.0
+ * @author Sebastián Salazar Molina
+ * @since 0.9.9
+ * @version 0.9.9
  * @see PharmacyOnDuty
  * @see Pharmacy
  * @see JpaRepository

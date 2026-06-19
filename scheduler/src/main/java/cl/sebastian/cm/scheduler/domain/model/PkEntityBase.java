@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
+import java.io.Serial;
 import java.time.OffsetDateTime;
 import java.util.Objects;
 
@@ -19,6 +20,10 @@ import java.util.Objects;
  * fecha de creacion y fecha de actualizacion. Las entidades que extienden esta
  * clase comparten el mismo criterio de igualdad y el mismo ciclo de
  * timestamps.</p>
+ *
+ * @author Sebastián Salazar Molina
+ * @since 0.9.9
+ * @version 0.9.9
  */
 @MappedSuperclass
 public class PkEntityBase extends Seba {
@@ -37,6 +42,7 @@ public class PkEntityBase extends Seba {
      * serialVersionUID que DEBE ser static, final, y de tipo long. Sino se
      * declara la JVM lo calcula en tiempo de ejecución.
      */
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**

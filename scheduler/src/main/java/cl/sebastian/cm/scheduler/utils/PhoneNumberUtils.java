@@ -33,8 +33,9 @@ import org.apache.commons.lang3.math.NumberUtils;
  * <li>Retorna {@code 0L} si el número no es un celular chileno válido.</li>
  * </ul>
  *
- * @author Sebastián Salazar
- * @version 1.0
+ * @author Sebastián Salazar Molina
+ * @since 0.9.9
+ * @version 0.9.9
  * @see StringUtils
  * @see NumberUtils
  */

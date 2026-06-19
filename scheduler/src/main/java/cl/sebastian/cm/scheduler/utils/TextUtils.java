@@ -17,8 +17,9 @@ import org.apache.commons.text.StringEscapeUtils;
  * ser instanciada ni extendida. Todos sus métodos son estáticos.
  * </p>
  *
- * @author Sebastián Salazar
- * @version 1.0
+ * @author Sebastián Salazar Molina
+ * @since 0.9.9
+ * @version 0.9.9
  * @see StringUtils
  * @see StringEscapeUtils
  */

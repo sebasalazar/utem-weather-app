@@ -28,8 +28,9 @@ import java.util.Objects;
  * explícitamente.
  * </p>
  *
- * @author [Tu nombre]
- * @version 1.0
+ * @author Sebastián Salazar Molina
+ * @since 0.9.9
+ * @version 0.9.9
  * @see Pharmacy
  * @see PkEntityBase
  */

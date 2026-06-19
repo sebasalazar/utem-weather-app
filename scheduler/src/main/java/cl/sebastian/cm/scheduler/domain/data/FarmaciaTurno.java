@@ -17,8 +17,9 @@ import java.time.LocalTime;
  * propiedades desconocidas.
  * </p>
  *
- * @author Sebastián C.
- * @version 1.0
+ * @author Sebastián Salazar Molina
+ * @since 0.9.9
+ * @version 0.9.9
  * @see JsonIgnoreProperties
  * @see JsonProperty
  */

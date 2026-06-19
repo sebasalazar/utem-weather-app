@@ -6,6 +6,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.DecimalMax;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.Size;
 import java.time.LocalTime;
 import java.util.Objects;
 
@@ -22,8 +27,9 @@ import java.util.Objects;
  * para la tienda en el sistema de comercio asociado.
  * </p>
  *
- * @author Sebastián Salazar
- * @version 1.0
+ * @author Sebastián Salazar Molina
+ * @since 0.9.9
+ * @version 0.9.9
  * @see PkEntityBase
  * @see Commerce
  */
@@ -44,24 +50,30 @@ public class Pharmacy extends PkEntityBase {
      * Identificador único de la tienda dentro del sistema de comercio. Es un
      * valor numérico y no puede repetirse en la tabla.
      */
+    @PositiveOrZero
     @Column(name = "store_id", nullable = false, unique = true)
     private Integer storeId;
 
     /**
      * Nombre comercial de la farmacia.
      */
+    @NotBlank
+    @Size(max = 255)
     @Column(name = "name", nullable = false)
     private String name;
 
     /**
      * Dirección física de la farmacia.
      */
+    @NotBlank
+    @Size(max = 255)
     @Column(name = "address", nullable = false)
     private String address;
 
     /**
      * Número de teléfono de contacto de la farmacia.
      */
+    @PositiveOrZero
     @Column(name = "phone", nullable = false)
     private Long phone;
 
@@ -80,12 +92,16 @@ public class Pharmacy extends PkEntityBase {
     /**
      * Latitud geográfica de la ubicación de la farmacia.
      */
+    @DecimalMin(value = "-90.0")
+    @DecimalMax(value = "90.0")
     @Column(name = "latitude", nullable = false)
     private double latitude;
 
     /**
      * Longitud geográfica de la ubicación de la farmacia.
      */
+    @DecimalMin(value = "-180.0")
+    @DecimalMax(value = "180.0")
     @Column(name = "longitude", nullable = false)
     private double longitude;
 

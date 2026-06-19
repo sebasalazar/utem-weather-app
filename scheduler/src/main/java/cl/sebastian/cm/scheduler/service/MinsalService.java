@@ -16,6 +16,8 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClient;
+import tools.jackson.core.type.TypeReference;
+import tools.jackson.databind.json.JsonMapper;
 
 /**
  * Servicio encargado de consultar el endpoint del Ministerio de Salud (MINSAL)
@@ -26,17 +28,37 @@ import org.springframework.web.client.RestClient;
  * de red, timeouts y respuestas del servidor, envolviéndolos en una excepción
  * propia ({@link SchException}) para un manejo uniforme en capas superiores.
  * </p>
+ * <p>
+ * La configuración del cliente incluye encabezados por defecto (Accept,
+ * User-Agent, Accept-Language) para garantizar una comunicación adecuada con el
+ * servicio externo.
+ * </p>
  *
- * @author Sebastián
- * @since 1.0
+ * @author Sebastián Salazar Molina
+ * @since 0.9.9
+ * @version 0.9.9
  * @see FarmaciaTurno
  * @see SchException
+ * @see RestClient
  */
 @Service
+
 public class MinsalService {
 
+    /**
+     * Logger de la clase para registrar eventos, advertencias y errores.
+     */
     private static final Logger LOGGER = LoggerFactory.getLogger(MinsalService.class);
 
+    /**
+     * Mapper JSON para deserializar la respuesta del servicio. Se utiliza una
+     * instancia estática para reutilización.
+     */
+    private static final JsonMapper MAPPER = JsonMapper.builder().build();
+
+    /**
+     * Cliente HTTP configurado para realizar las peticiones al servicio MINSAL.
+     */
     private final RestClient restClient;
 
     /**
@@ -48,11 +70,11 @@ public class MinsalService {
      * en cada llamada.
      * </p>
      *
-     * @param builder builder de {@link RestClient} auto-configurado por Spring
+     * @param builder builder de {@link RestClient} auto-configurado por Spring.
      * @param baseUrl URL base del endpoint de farmacias (ej.
-     * {@code https://minsal.cl/api})
+     * {@code https://minsal.cl/api}).
      * @throws IllegalArgumentException si la URL base es nula o vacía después
-     * de recortar espacios
+     * de recortar espacios.
      */
     @Autowired
     public MinsalService(RestClient.Builder builder,
@@ -65,7 +87,7 @@ public class MinsalService {
 
         this.restClient = builder
                 .baseUrl(url)
-                .defaultHeader("Accept", MediaType.APPLICATION_JSON_VALUE)
+                .defaultHeader("Accept", MediaType.ALL_VALUE)
                 .defaultHeader("User-Agent", "Sebastian_CL/1.0")
                 .defaultHeader("Accept-Language", "es-CL,es;q=0.9")
                 .build();
@@ -81,31 +103,47 @@ public class MinsalService {
      * </p>
      * <p>
      * <strong>Comportamiento ante errores:</strong>
+     * </p>
      * <ul>
-     * <li>Si la respuesta es exitosa pero no contiene datos, retorna una lista
-     * vacía.</li>
+     * <li>Si la respuesta es exitosa pero no contiene datos (cuerpo vacío o
+     * arreglo vacío), retorna una lista vacía.</li>
      * <li>En caso de errores HTTP (4xx o 5xx), errores de conectividad o
-     * timeouts, se registra el error y se lanza una {@link SchException} que
-     * envuelve la causa.</li>
+     * timeouts, se registra el error y se retorna una lista vacía.</li>
+     * <li>No se lanza {@link SchException} en esta versión; en su lugar, se
+     * maneja internamente retornando lista vacía.</li>
      * </ul>
+     * <p>
+     * <strong>Nota:</strong> Aunque el Javadoc original menciona
+     * {@link SchException}, la implementación actual no la lanza; se retorna
+     * {@code List.of()} en todos los casos de error. Este comportamiento está
+     * documentado para claridad.
      * </p>
      *
      * @return lista de farmacias de turno; nunca {@code null}, puede estar
-     * vacía si no hay datos.
-     * @throws SchException si ocurre cualquier error durante la comunicación
-     * con el servicio (incluye errores HTTP, problemas de red o errores
-     * inesperados).
+     * vacía si no hay datos o si ocurre un error.
      * @see FarmaciaTurno
      */
     public List<FarmaciaTurno> obtenerFarmaciasTurno() {
         final String path = "/getLocalesTurnos.php";
-        LOGGER.info("Consultando farmacias de turno en: {}{}", restClient, path);
+        LOGGER.info("Consultando farmacias de turno en: {}", path);
 
         try {
-            FarmaciaTurno[] farmacias = restClient.get()
+            final String json = restClient.get()
                     .uri(path)
                     .retrieve()
-                    .body(FarmaciaTurno[].class);
+                    .body(String.class);
+
+            if (StringUtils.isBlank(json)) {
+                LOGGER.warn("Respuesta vacía del servicio MINSAL");
+                return List.of();
+            }
+
+            LOGGER.debug("Respuesta recibida (primeros 128 chars): {}",
+                    StringUtils.abbreviate(json, 128));
+
+            final FarmaciaTurno[] farmacias = MAPPER.readValue(
+                    json, new TypeReference<FarmaciaTurno[]>() {
+            });
 
             if (ArrayUtils.isEmpty(farmacias)) {
                 LOGGER.warn("No se encontraron farmacias de turno disponibles");

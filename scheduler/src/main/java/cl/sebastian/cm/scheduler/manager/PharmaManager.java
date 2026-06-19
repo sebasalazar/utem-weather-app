@@ -44,8 +44,9 @@ import org.springframework.transaction.annotation.Transactional;
  * produce un rollback completo.
  * </p>
  *
- * @author Sebastián Salazar
- * @version 1.0
+ * @author Sebastián Salazar Molina
+ * @since 0.9.9
+ * @version 0.9.9
  * @see Pharmacy
  * @see PharmacyOnDuty
  * @see FarmaciaTurno

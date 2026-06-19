@@ -9,6 +9,10 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 /**
  * Clase base para todas las entidades del sistema. Proporciona funcionalidad
  * común como serialización y representación en string.
+ *
+ * @author Sebastián Salazar Molina
+ * @since 0.9.9
+ * @version 0.9.9
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class Seba implements Serializable {
