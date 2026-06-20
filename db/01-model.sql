@@ -1,5 +1,7 @@
 BEGIN TRANSACTION;
 
+CREATE EXTENSION postgis;
+
 DROP TABLE IF EXISTS pharmacies CASCADE;
 CREATE TABLE pharmacies (
     pk          bigint           GENERATED ALWAYS AS IDENTITY,  -- Clave primaria interna
@@ -17,6 +19,8 @@ CREATE TABLE pharmacies (
     PRIMARY KEY (pk)
 );
 CREATE INDEX ON pharmacies(commerce);
+CREATE INDEX ON pharmacies(latitude,longitude);
+CREATE INDEX ON pharmacies USING gist (ST_MakePoint(longitude, latitude)::geography);
 CREATE UNIQUE INDEX ON pharmacies(store_id);
 
 
@@ -48,7 +52,8 @@ CREATE TABLE stations (
     PRIMARY KEY (pk)
 );
 CREATE UNIQUE INDEX ON stations(UPPER(code));
-
+CREATE INDEX ON stations(latitude,longitude);
+CREATE INDEX ON stations USING gist (ST_MakePoint(longitude, latitude)::geography);
 
 
 DROP TABLE IF EXISTS observations CASCADE;

@@ -1,4 +1,4 @@
-package cl.utem.cm.weather;
+package cl.sebastian.cm.rest;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;

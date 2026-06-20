@@ -1,4 +1,4 @@
-package cl.utem.cm.weather;
+package cl.sebastian.cm.rest;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
