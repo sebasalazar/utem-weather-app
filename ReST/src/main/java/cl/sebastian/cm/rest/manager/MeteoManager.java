@@ -5,13 +5,12 @@ import cl.sebastian.cm.rest.domain.model.Observation;
 import cl.sebastian.cm.rest.domain.repository.ObservationRepository;
 import cl.sebastian.cm.rest.utils.CoordinatesUtils;
 import java.util.List;
+import java.util.Optional;
+import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
-import org.apache.commons.collections4.CollectionUtils;
 
 /**
  * Servicio de dominio para consultas meteorológicas con criterio de proximidad

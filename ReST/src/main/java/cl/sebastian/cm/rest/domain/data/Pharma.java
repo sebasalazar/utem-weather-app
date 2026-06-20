@@ -4,7 +4,6 @@ import cl.sebastian.cm.rest.domain.Seba;
 import cl.sebastian.cm.rest.domain.model.Pharmacy;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
-
 import java.time.LocalTime;
 
 /**

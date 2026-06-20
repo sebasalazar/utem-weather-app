@@ -7,12 +7,10 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.gson.GsonFactory;
 import io.swagger.v3.oas.annotations.media.Schema;
-
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.Locale;
 import org.apache.commons.lang3.BooleanUtils;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Strings;
 import org.apache.commons.validator.routines.EmailValidator;
