@@ -124,6 +124,15 @@ public class PharmaManager {
     }
 
     /**
+     * Obtiene la distancia máxima de búsqueda configurada.
+     *
+     * @return la distancia máxima en metros.
+     */
+    public int getMaxDistance() {
+        return maxDistance;
+    }
+
+    /**
      * Verifica si una farmacia está en horario laboral para una fecha y hora
      * determinadas.
      * <p>

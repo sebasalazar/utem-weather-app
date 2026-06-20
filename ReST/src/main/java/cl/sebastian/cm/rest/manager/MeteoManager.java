@@ -114,6 +114,15 @@ public class MeteoManager {
      * {@link Optional#empty()} si no existe ninguna o las coordenadas son
      * inválidas.     * 
      */
+    /**
+     * Obtiene la distancia máxima de búsqueda configurada.
+     *
+     * @return la distancia máxima en metros.
+     */
+    public int getMaxDistance() {
+        return maxDistance;
+    }
+
     public Optional<Observation> getLastNearby(final double latitude, final double longitude) {
         if (!CoordinatesUtils.areValid(latitude, longitude)) {
             LOGGER.warn("Coordenadas inválidas recibidas: lat={}, lon={}", latitude, longitude);
