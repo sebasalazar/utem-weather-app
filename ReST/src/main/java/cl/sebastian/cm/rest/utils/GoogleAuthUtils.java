@@ -154,7 +154,7 @@ public final class GoogleAuthUtils {
                 throw new ValidationException("No se pudo verificar el idToken");
             }
             return googleIdToken;
-        } catch (GeneralSecurityException ex) {
+        } catch (GeneralSecurityException | IllegalArgumentException ex) {
             throw new ValidationException("Firma o estructura del idToken inválida", ex);
         } catch (IOException ex) {
             throw new AuthException("Error de red al validar el idToken con Google", ex);

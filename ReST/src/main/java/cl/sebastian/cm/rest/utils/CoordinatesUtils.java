@@ -65,7 +65,7 @@ public final class CoordinatesUtils {
      * </p>
      */
     private CoordinatesUtils() {
-        throw new IllegalStateException("Clase utilitaria, no instanciable");
+        throw new UnsupportedOperationException("Clase utilitaria, no instanciable");
     }
 
     /**
