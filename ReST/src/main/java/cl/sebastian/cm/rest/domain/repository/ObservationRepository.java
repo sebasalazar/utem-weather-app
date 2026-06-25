@@ -130,20 +130,20 @@ public interface ObservationRepository extends JpaRepository<Observation, Long> 
      * @see <a href="https://postgis.net/docs/ST_Distance.html">ST_Distance</a>
      */
     @Query(nativeQuery = true, value = """
-    SELECT DISTINCT ON (s.id) 
+    SELECT DISTINCT ON (s.pk) 
            o.pk::bigint AS id,
            ST_Distance(
                ST_MakePoint(s.longitude, s.latitude)::geography,
                ST_MakePoint(:longitude, :latitude)::geography
            )::int AS distance
     FROM observations o
-    INNER JOIN stations s ON o.station_fk = s.id
+    INNER JOIN stations s ON o.station_fk = s.pk
     WHERE ST_DWithin(
         ST_MakePoint(s.longitude, s.latitude)::geography,
         ST_MakePoint(:longitude, :latitude)::geography,
         :distance
     )
-    ORDER BY s.id, o.date_time DESC
+    ORDER BY s.pk, o.date_time DESC
     """)
     List<IdDistance> searchByDistance(
             @Param("latitude") double latitude,
