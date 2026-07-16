@@ -256,7 +256,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
       children: <Widget>[
         TileLayer(
           urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-          userAgentPackageName: 'com.example.weather',
+          userAgentPackageName: 'cl.utem.cm.weather',
         ),
         MarkerLayer(
           markers: <Marker>[
@@ -266,7 +266,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
               height: 40.0,
               child: const Icon(
                 Icons.location_pin,
-                color: AppColors.rojo,
+                color: AppColors.negro,
                 size: 40.0,
               ),
             ),
